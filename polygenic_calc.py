@@ -33,7 +33,7 @@ def get_possible_capital(linkage):  # [2, 0] 꼴
     return capital_set
 
 
-alleles = 10
+alleles = 5
 linkages_list = []  # [[4], [3, 1], [2, 2], [2, 1, 1], [1, 1, 1, 1]] 꼴
 
 for splits in range(1, alleles + 1):
@@ -71,17 +71,21 @@ print("\n")
 
 
 for key1, value1 in linkages_result.items():
-    linkage_status = sorted(
-        [x.strip() for x in str(key1)[1:-1].split(",")], reverse=True
-    )
+    link_status = sorted([x.strip() for x in str(key1)[1:-1].split(",")], reverse=True)
+    link_status_new = []
+    independent_cnt = 0
 
-    for i in range(0, len(linkage_status)):
-        if linkage_status[i] == "1":
-            linkage_status[i] += "독립"
+    for i in range(0, len(link_status)):
+        if link_status[i] == "1":
+            independent_cnt = independent_cnt + 1
+
         else:
-            linkage_status[i] += "연관"
+            link_status_new.append(link_status[i] + "연관")
 
-    print(linkage_status)
+    if independent_cnt > 0:
+        link_status_new.append(str(independent_cnt) + "독립")
+
+    print(" ".join(link_status_new))
 
     value1_list = []
     for k, v in dict(value1).items():  # 2차원 리스트로 변환
@@ -90,6 +94,6 @@ for key1, value1 in linkages_result.items():
     value1_list = sorted(value1_list, key=lambda l: (len(l[0]), l))
     value1_dict = {item[0]: item[1] for item in value1_list}
     for k, v in value1_dict.items():
-        print(k, ": ", v)
+        print(k[1:-1].replace(", ", ":"), " ", str(v)[1:-1])
 
     print("\n")
