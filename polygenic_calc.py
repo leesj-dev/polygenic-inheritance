@@ -70,8 +70,8 @@ for item in final_result:
 print("\n")
 
 
-for key1, value1 in linkages_result.items():
-    link_status = sorted([x.strip() for x in str(key1)[1:-1].split(",")], reverse=True)
+for key, value in linkages_result.items():
+    link_status = sorted([x.strip() for x in str(key)[1:-1].split(",")], reverse=True)
     link_status_new = []
     independent_cnt = 0
 
@@ -87,13 +87,13 @@ for key1, value1 in linkages_result.items():
 
     print(" ".join(link_status_new))
 
-    value1_list = []
-    for k, v in dict(value1).items():  # 2차원 리스트로 변환
-        value1_list.append([k, v])
+    value_list = []
+    for k, v in dict(value).items():  # 2차원 리스트로 변환
+        value_list.append([k, v])
 
-    value1_list = sorted(value1_list, key=lambda l: (len(l[0]), l))
-    value1_dict = {item[0]: item[1] for item in value1_list}
-    for k, v in value1_dict.items():
+    value_list = sorted(value_list, key=lambda l: (len(l[0]), l))
+    value_dict = {item[0]: item[1] for item in value_list}
+    for k, v in value_dict.items():
         print(k[1:-1].replace(", ", ":"), " ", str(v)[1:-1])
 
     print("\n")
