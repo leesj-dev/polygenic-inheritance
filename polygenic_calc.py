@@ -65,8 +65,7 @@ for key, value in linkages_result.items():
 
     print(" ".join(link_status_new))
 
-    value_list = [[k, v] for k, v in dict(value).items()]  # 2차원 리스트로 변환
-    value_list = sorted(value_list, key=lambda l: (len(l[0]), l))
+    value_list = sorted([[k, v] for k, v in dict(value).items()], key=lambda l: (len(l[0]), l))  # 2차원 리스트로 변환
     value_dict = {item[0]: item[1] for item in value_list}
     for k, v in value_dict.items():
         print(k[1:-1].replace(", ", ":"), " ", str(v)[1:-1])
