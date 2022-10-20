@@ -6,7 +6,6 @@ import math
 
 def get_ratio(poly_list):
     poly_germ = [[poly[0] + poly[1], poly[0], poly[1], 0] for poly in poly_list]
-
     child = list([sum(x) for x in product(*poly_germ)])
     max_capital = sum([sum(x) for x in poly_list])
     ratio = [child.count(n) for n in range(0, max_capital + 1)]
