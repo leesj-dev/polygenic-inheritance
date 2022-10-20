@@ -5,16 +5,11 @@ import math
 
 
 def get_ratio(poly_list):
-    poly_germ = []
-    for poly in poly_list:
-        poly_germ.append([poly[0] + poly[1], poly[0], poly[1], 0])
+    poly_germ = [[poly[0] + poly[1], poly[0], poly[1], 0] for poly in poly_list]
 
     child = list([sum(x) for x in product(*poly_germ)])
     max_capital = sum([sum(x) for x in poly_list])
-    ratio = []
-    for n in range(0, max_capital + 1):
-        ratio.append(child.count(n))
-
+    ratio = [child.count(n) for n in range(0, max_capital + 1)]
     gcd_val = math.gcd(*ratio)
     for idx in range(0, len(ratio)):
         ratio[idx] = int(ratio[idx] / gcd_val)
@@ -34,12 +29,7 @@ def get_possible_capital(linkage):  # [2, 0] 꼴
 
 
 alleles = 5
-linkages_list = []  # [[4], [3, 1], [2, 2], [2, 1, 1], [1, 1, 1, 1]] 꼴
-
-for splits in range(1, alleles + 1):
-    for x in comb(range(1, alleles + 1), splits):
-        if sum(x) == alleles:
-            linkages_list.append(list(x))
+linkages_list = [list(x) for splits in range(1, alleles + 1) for x in comb(range(1, alleles + 1), splits) if sum(x) == alleles]
 
 final_result = []
 k_values = {}
@@ -49,16 +39,11 @@ for k in range(0, len(linkages_list)):
     linkages = linkages_list[k]
     possible_capital_list = []
     k_values = defaultdict(list)
-
-    for capital_set in linkages:
-        possible_capital_list.append(get_possible_capital(capital_set))
+    possible_capital_list = [get_possible_capital(capital_set) for capital_set in linkages]
 
     for element in set(tuple(sorted(t)) for t in product(*possible_capital_list)):
         result = get_ratio(list(element))
-
-        if result[0] not in final_result:
-            final_result.append(result[0])
-
+        final_result = [result[0] if result[0] not in final_result]
         k_values[str(result[0])].append(result[1])
 
     linkages_result[str(linkages)] = k_values
@@ -87,10 +72,7 @@ for key, value in linkages_result.items():
 
     print(" ".join(link_status_new))
 
-    value_list = []
-    for k, v in dict(value).items():  # 2차원 리스트로 변환
-        value_list.append([k, v])
-
+    value_list = [[k, v] for k, v in dict(value).items()]  # 2차원 리스트로 변환
     value_list = sorted(value_list, key=lambda l: (len(l[0]), l))
     value_dict = {item[0]: item[1] for item in value_list}
     for k, v in value_dict.items():
