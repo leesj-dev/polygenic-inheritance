@@ -10,10 +10,9 @@ def get_ratio(poly_list):
     max_capital = sum([sum(x) for x in poly_list])
     ratio = [child.count(n) for n in range(0, max_capital + 1)]
     gcd_val = math.gcd(*ratio)
-    for idx in range(0, len(ratio)):
-        ratio[idx] = int(ratio[idx] / gcd_val)
+    ratio = [int(ratio[idx] / gcd_val for item in ratio]
 
-    return (ratio, poly_list)
+    return ratio
 
 
 def get_possible_capital(linkage):  # [2, 0] 꼴
@@ -36,8 +35,9 @@ for k in range(0, len(linkages_list)):
 
     for element in set(tuple(sorted(t)) for t in product(*possible_capital_list)):
         result = get_ratio(list(element))
-        final_result = [result[0] if result[0] not in final_result]
-        k_values[str(result[0])].append(result[1])
+        if result not in final_result:
+            final_result.append(result)
+        k_values[str(result)].append(list(element))
 
     linkages_result[str(linkages)] = k_values
 
