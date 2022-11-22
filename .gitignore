@@ -4,7 +4,7 @@ phenotype
 phenotype_noomp
 output.txt
 result.txt
-phenotype_calc_spaghetti.py
+polygenic_calc_spaghetti.py
 question_part1.py
 question_part2.py
 question_part3.py
