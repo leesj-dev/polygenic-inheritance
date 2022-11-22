@@ -2,3 +2,5 @@
 .DS_Store
 phenotype
 phenotype_noomp
+output.txt
+result.txt
