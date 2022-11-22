@@ -11,10 +11,8 @@ i = 0
 while True:
     c_n.append(abs(b_n[i+1] - b_n[i]))
     if i >= b_1-1 and set(c_n[i-b_1+1 : i]) == {0}:
-        m = i
-        a_m = a_n[i]
         break
     else:
         i = i + 1
 
-print('m =', m, 'a_m =', a_m, 'S =', sum(c_n))
+print('m =', i, 'a_m =', a_n[i], 'S =', sum(c_n))
