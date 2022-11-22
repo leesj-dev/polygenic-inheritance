@@ -48,7 +48,6 @@ int main() {
   vector<cpp_int> row(1, 1);
   vector<vector<int> > rowPrime;
 
-
   for (int alleles = 1; alleles <= maxAlleles; alleles++) {
     vector<cpp_int> row1 = row;
     row1.push_back(0);
@@ -73,7 +72,6 @@ int main() {
 
     /* for each number in the row, we will make the number into a string and divide it by 2 letters
     and put it into a vector (splitTwo), starting from the beginning of the string */
-    #pragma omp parallel for
     for (int num = 0; num < row.size(); num++) {
       string item = to_string(row[num]);
       vector<int> splitTwo;
@@ -106,7 +104,6 @@ int main() {
         }
         cout << '\n';
         */
-        #pragma omp critical
         rowPrime.push_back(splitTwo);
       }
     }
